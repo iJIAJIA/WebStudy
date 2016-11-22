@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台选择器</title>
+    <style type="text/css">
+        /* div p 会将div层下面所有的p元素(后代元素)设置为粗体 */
+        div p {font-weight: bold;}
+        /*ul>li 指影响ul下面的第一级li元素*/
+        ul>li {text-transform: uppercase;}
+    </style>
+</head>
+<body>
+    <div>
+        <!-- div p 会将div层下面所有的p元素设置为粗体 -->
+        <p>div p {font-weight: bold;}</p>
+        <ul>
+            <li>ul>li {text-transform: uppercase;}</li>
+            <li>Insert key</li>
+            <li>Turn key <strong>clockwise</strong></li>
+            <span>
+                <li>ul span li is not effected by ul>li {text-transform: uppercase;} </li>
+            </span>
+            <li>Push accelerator</li>
+        </ul>
+        <p> div 第一级p元素</p>
+        <span>
+            <p>div 第二级p元素</p>
+        </span>
+    </div>
+    <p> 跟div同级的p元素,该元素不受影响</p>
+</body>
+</html>
