@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" value="2014-09-23 23:05" ng-model="startDate"
+		id="startDate">
+	<input type="text" value="2014-09-23 23:05" ng-model="endDate"
+		id="endDate">
+	<script type="text/javascript">
+		$('#startDate').datetimepicker({
+			format : 'yyyy-mm-dd hh:ii' /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+		});
+		$('#endDate').datetimepicker({
+			format : 'yyyy-mm-dd hh:ii' /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+		});
+	</script>
+</body>
+</html>

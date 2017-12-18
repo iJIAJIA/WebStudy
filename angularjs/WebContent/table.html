@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular-mocks.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<title>table</title>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="customersCtrl">
+		<input type="text" ng-model="startDate" id="startDate"> <input
+			type="text" ng-model="endDate" id="endDate"> <input
+			ng-model="topic"></input> <input type="button" ng-click="click()"
+			value="点我触发"></input>
+		<table>
+			<tr ng-repeat="x in contacts">
+				<td>{{ x.name }}</td>
+				<td>{{ x.phone }}</td>
+			</tr>
+		</table>
+
+	</div>
+	<script>
+		var app = angular.module('myApp', [ 'ngMockE2E' ]);
+		app.run([ '$httpBackend', function($httpBackend) {
+			contacts = [ {
+				id : 1,
+				name : 'Ada Lovelace',
+				phone : '8445551815'
+			}, {
+				id : 2,
+				name : 'Grace Hopper',
+				phone : '8445551906'
+			}, {
+				id : 3,
+				name : 'Charles Babbage',
+				phone : '8445556433'
+			} ];
+
+			// $httpBackend interactions are defined here...
+			$httpBackend.whenGET('http://mockUrl/json').respond(contacts);
+		} ]);
+		app.controller('customersCtrl', function($scope, $http) {
+			$http.get("http://mockUrl/json").then(function(result) {
+				console.log(result);
+				$scope.contacts = result.data;
+			});
+
+			$scope.topic = 'topic'
+			//在Controller中绑定选择控件  
+			var datepicker1 = $('#startDate').datetimepicker({
+				format : 'YYYY-MM-DD',
+				locale : moment.locale('zh-cn')
+			}).on('dp.change', function(e) {
+				var result = new moment(e.date).format('YYYY-MM-DD');
+				$scope.startDate = result;
+				$scope.$apply();
+			});
+
+			$('#endDate').datetimepicker({
+				format : 'YYYY年MM月DD日 hh:mm',
+				locale : moment.locale('zh-cn')
+			}).on('dp.change', function(e) {
+				var result = new moment(e.date).format('YYYY年MM月DD日 hh:mm');
+				$scope.endDate = result;
+				$scope.$apply();
+			});
+			$scope.click = function() {
+				console.log($scope.topic);
+				console.log($scope.startDate)
+				console.log($scope.endDate)
+			}
+		});
+	</script>
+</body>
+</html>
